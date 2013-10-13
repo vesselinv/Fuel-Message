@@ -63,6 +63,11 @@ class Message
 
 			if ( ! empty($flash) )
 			{
+				if ( is_array($flash) && empty($flash[0]) )
+				{
+					continue;
+				}
+
 				$output .= \View::forge($type, array('messages' => $flash), false);
 			}
 		}
