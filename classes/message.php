@@ -59,12 +59,12 @@ class Message
 
 		foreach (static::$allowed_types as $type)
 		{
-			if ( ! static::get_flash($type))
-			{
-				continue;
-			}
+			$flash = static::get_flash($type);
 
-			$output .= \View::forge($type, array('messages' => static::get_flash($type)), false);
+			if ( ! empty($flash) )
+			{
+				$output .= \View::forge($type, array('messages' => $flash), false);
+			}
 		}
 
 		return $output;
